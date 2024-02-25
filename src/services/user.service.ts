@@ -7,7 +7,7 @@ interface User {
   firstName: string;
   lastName: string;
   password: string;
-  role: Role | null;
+  role?: Role | null;
 }
 
 async function createUser(user: User) {
@@ -17,6 +17,10 @@ async function createUser(user: User) {
 
   console.log(createdUser);
 }
+
+
+
+
 
 createUser({
   email: "ishimwe@ishimweeee.rw",
