@@ -29,3 +29,5 @@ createUser({
   password: "test@test",
   role: "USER",
 });
+
+export { createUser }
