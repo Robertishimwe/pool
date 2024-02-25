@@ -16,7 +16,7 @@ class UsersController {
         };
         const newUser = await (0, user_service_1.createUser)(user);
         const openaiThread = await (0, openai_services_1.CreateNewThread)();
-        // const newThread= await createThread({`${newUser.id}`, openaiThread})
+        //  const newThread= await createThread({`${newUser.id}`, openaiThread})
         console.log(newUser);
         return newUser;
     };

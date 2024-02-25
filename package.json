@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && node dist/index.js",
+    "start": "npm run dist/index.js",
     "dev": "ts-node-dev --watch --respawn src/index.ts"
   },
   "keywords": [],
