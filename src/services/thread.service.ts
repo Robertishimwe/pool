@@ -33,3 +33,5 @@ async function getThread(user: string) {
     console.log(thread)
     return thread  
 }
+
+export {createThread, getThreads, getThread}

@@ -92,4 +92,4 @@ const runAssistant = async (threadId, assistantId) => {
 // runAssistant(process.env.THREAD_ID, process.env.ASSISTANT_ID)
 // checkRunStatus(process.env.THREAD_ID, process.env.RUN_ID)
 // getResponse(process.env.THREAD_ID)
-module.exports = { createAssistant, createThread, sendMessage, runAssistant, checkRunStatus, getResponse  };
+module.exports = { createAssistant, createThread as CreateNewThread, sendMessage, runAssistant, checkRunStatus, getResponse  };

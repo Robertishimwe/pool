@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 
 import { createUser } from "../services/user.service";
+import { createThread } from "../services/thread.service";
+import { CreateNewThread } from "../services/openai.services"
 import { PassowrdProtection } from "../utils/encryption";
 
 interface UserInput {
@@ -25,6 +27,8 @@ class UsersController {
     };
 
     const newUser = await createUser(user)
+    const openaiThread = await CreateNewThread()
+    const newThread= await createThread({newUser.id, openaiThread})
     console.log(newUser)
     return newUser
   };
