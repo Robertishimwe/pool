@@ -1,14 +1,15 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const cluster = require("cluster");
-const os = require("os");
-const cors = require("cors");
+import express, { Request, Response } from "express";
+
+import dotenv from "dotenv";
+import cluster from "cluster";
+import os from "os";
+import cors from "cors";
 
 dotenv.config();
 
 const numCPUs = os.cpus().length;
 
-if (cluster.isMaster) {
+if (cluster.isPrimary) {
   console.log(`Master ${process.pid} is running`);
 
   // Fork workers based on CPU count and available memory
@@ -17,7 +18,7 @@ if (cluster.isMaster) {
     cluster.fork();
   }
 
-  cluster.on("exit", (worker, code, signal) => {
+  cluster.on("exit", (worker: any, code: number, signal: string) => {
     console.error(`worker ${worker.process.pid} died`);
 
     // Re-fork a new worker to replace the dead one
@@ -30,7 +31,7 @@ if (cluster.isMaster) {
 //   app.use("/api", require("./routes/index")); // Use require for routes
 
   // Define a route
-  app.get("/", (req, res) => {
+  app.get("/", (req:Request, res:Response) => {
     res.send(`Hello from worker ${process.pid}`);
   });
 

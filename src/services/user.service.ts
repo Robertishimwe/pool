@@ -1,22 +1,27 @@
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient, Role } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// Example usage:
-async function createUser(email, firstName, lastName, password, role) {
-    const user = await prisma.user.create({
-        data: {
-            email,
-            firstName,
-            lastName,
-            password,
-            role
-        },
-
-        
-    });
-
-    console.log(user)
+interface User {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  role: Role | null;
 }
 
-createUser("ishimwe@ishimweee.rw","ishimwe","robert","test@test","USER");
+async function createUser(user: User) {
+  const createdUser = await prisma.user.create({
+    data: user,
+  });
+
+  console.log(createdUser);
+}
+
+createUser({
+  email: "ishimwe@ishimweeee.rw",
+  firstName: "ishimwe",
+  lastName: "robert",
+  password: "test@test",
+  role: "USER",
+});
