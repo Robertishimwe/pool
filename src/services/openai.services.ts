@@ -4,7 +4,8 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const createAssistant = async (name, instructions) => {
+
+const createAssistant = async (name:string, instructions:string) => {
   try {
     const assistant = await openai.beta.assistants.create({
       name,
@@ -29,7 +30,7 @@ const CreateNewThread = async () => {
   }
 };
 
-const sendMessage = async (threadId, text) => {
+const sendMessage = async (threadId:string, text:string) => {
   try {
     const message = await openai.beta.threads.messages.create(
         threadId,
@@ -46,7 +47,7 @@ const sendMessage = async (threadId, text) => {
 };
 
 
-const runAssistant = async (threadId, assistantId) => {
+const runAssistant = async (threadId:string, assistantId:string) => {
     try {
         const run = await openai.beta.threads.runs.create(
             threadId,
@@ -62,7 +63,7 @@ const runAssistant = async (threadId, assistantId) => {
     }
   };
 
-  const checkRunStatus = async (threadId, runId) => {
+  const checkRunStatus = async (threadId:string, runId:string) => {
     try {
         const run = await openai.beta.threads.runs.retrieve(
             threadId,
@@ -75,7 +76,7 @@ const runAssistant = async (threadId, assistantId) => {
     }
   };
 
-  const getResponse = async (threadId) => {
+  const getResponse = async (threadId:string) => {
     try {
         const messages = await openai.beta.threads.messages.list(
             threadId
@@ -92,4 +93,4 @@ const runAssistant = async (threadId, assistantId) => {
 // runAssistant(process.env.THREAD_ID, process.env.ASSISTANT_ID)
 // checkRunStatus(process.env.THREAD_ID, process.env.RUN_ID)
 // getResponse(process.env.THREAD_ID)
-module.exports = { createAssistant,  CreateNewThread, sendMessage, runAssistant, checkRunStatus, getResponse  };
+export { createAssistant,  CreateNewThread, sendMessage, runAssistant, checkRunStatus, getResponse  };

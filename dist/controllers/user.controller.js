@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_service_1 = require("../services/user.service");
-const thread_service_1 = require("../services/thread.service");
 const openai_services_1 = require("../services/openai.services");
 const encryption_1 = require("../utils/encryption");
 class UsersController {
@@ -17,7 +16,7 @@ class UsersController {
         };
         const newUser = await (0, user_service_1.createUser)(user);
         const openaiThread = await (0, openai_services_1.CreateNewThread)();
-        const newThread = await (0, thread_service_1.createThread)({ newUser, : .id, openaiThread });
+        // const newThread= await createThread({`${newUser.id}`, openaiThread})
         console.log(newUser);
         return newUser;
     };

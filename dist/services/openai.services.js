@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getResponse = exports.checkRunStatus = exports.runAssistant = exports.sendMessage = exports.CreateNewThread = exports.createAssistant = void 0;
 const OpenAI = require("openai");
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -17,7 +19,8 @@ const createAssistant = async (name, instructions) => {
         throw error;
     }
 };
-const createThread = async () => {
+exports.createAssistant = createAssistant;
+const CreateNewThread = async () => {
     try {
         const thread = await openai.beta.threads.create();
         console.log(thread);
@@ -27,6 +30,7 @@ const createThread = async () => {
         throw error;
     }
 };
+exports.CreateNewThread = CreateNewThread;
 const sendMessage = async (threadId, text) => {
     try {
         const message = await openai.beta.threads.messages.create(threadId, {
@@ -40,6 +44,7 @@ const sendMessage = async (threadId, text) => {
         throw error;
     }
 };
+exports.sendMessage = sendMessage;
 const runAssistant = async (threadId, assistantId) => {
     try {
         const run = await openai.beta.threads.runs.create(threadId, {
@@ -53,6 +58,7 @@ const runAssistant = async (threadId, assistantId) => {
         throw error;
     }
 };
+exports.runAssistant = runAssistant;
 const checkRunStatus = async (threadId, runId) => {
     try {
         const run = await openai.beta.threads.runs.retrieve(threadId, runId);
@@ -63,6 +69,7 @@ const checkRunStatus = async (threadId, runId) => {
         throw error;
     }
 };
+exports.checkRunStatus = checkRunStatus;
 const getResponse = async (threadId) => {
     try {
         const messages = await openai.beta.threads.messages.list(threadId);
@@ -73,10 +80,4 @@ const getResponse = async (threadId) => {
         throw error;
     }
 };
-// createAssistant("testass", "you are rwandan laws experts and you answer users question only related to law basing on your knowleadge. if you do not have the answer for the asked question, relpy saying that currently you do not have information regarding the asked question.");
-// createThread(process.env.ASSISTANT_ID)
-// sendMessage(process.env.THREAD_ID, "What can happen to me if i take rwanda users data outsite the country without informing authority? which artile talks about that?")
-// runAssistant(process.env.THREAD_ID, process.env.ASSISTANT_ID)
-// checkRunStatus(process.env.THREAD_ID, process.env.RUN_ID)
-// getResponse(process.env.THREAD_ID)
-module.exports = { createAssistant, createThread, as, CreateNewThread, sendMessage, runAssistant, checkRunStatus, getResponse };
+exports.getResponse = getResponse;
