@@ -18,7 +18,7 @@ const createAssistant = async (name, instructions) => {
   }
 };
 
-const createThread = async () => {
+const CreateNewThread = async () => {
   try {
     const thread = await openai.beta.threads.create();
 
@@ -92,4 +92,4 @@ const runAssistant = async (threadId, assistantId) => {
 // runAssistant(process.env.THREAD_ID, process.env.ASSISTANT_ID)
 // checkRunStatus(process.env.THREAD_ID, process.env.RUN_ID)
 // getResponse(process.env.THREAD_ID)
-module.exports = { createAssistant, createThread as CreateNewThread, sendMessage, runAssistant, checkRunStatus, getResponse  };
+module.exports = { createAssistant,  CreateNewThread, sendMessage, runAssistant, checkRunStatus, getResponse  };
