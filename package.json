@@ -2,9 +2,10 @@
   "name": "justicebotassistant",
   "version": "1.0.0",
   "description": "hello",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js",
     "dev": "ts-node-dev --watch --respawn src/index.ts"
   },
   "keywords": [],
