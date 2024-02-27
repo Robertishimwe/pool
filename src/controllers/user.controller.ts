@@ -12,6 +12,11 @@ interface UserInput {
     password: string;
   }
 
+interface Thread {
+    userId:      string ,
+    threadId:   string
+}
+
 
 class UsersController {
   //create account
@@ -28,9 +33,13 @@ class UsersController {
 
     const newUser = await createUser(user)
     const openaiThread = await CreateNewThread()
-  //  const newThread= await createThread({`${newUser.id}`, openaiThread})
-    console.log(newUser)
-    return newUser
+
+    const thread: Thread = {
+      userId: newUser.id,
+      threadId: openaiThread.id
+    }
+    const newThread= await createThread(thread)
+    res.status(201).json({user:newUser, thread: newThread})
   };
 
 }

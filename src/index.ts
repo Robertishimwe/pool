@@ -5,6 +5,8 @@ import cluster from "cluster";
 import os from "os";
 import cors from "cors";
 
+import routes from "./routes"
+
 dotenv.config();
 
 const numCPUs = os.cpus().length;
@@ -28,7 +30,7 @@ if (cluster.isPrimary) {
   const app = express();
   app.use(express.json());
   app.use(cors({ origin: "*" }));
-//   app.use("/api", require("./routes/index")); // Use require for routes
+  app.use("/api", routes); // Use require for routes
 
   // Define a route
   app.get("/", (req:Request, res:Response) => {

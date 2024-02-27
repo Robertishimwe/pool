@@ -1,4 +1,30 @@
-import { PrismaClient, Role } from '@prisma/client';
+// import { PrismaClient, Role } from '@prisma/client';
+
+// const prisma = new PrismaClient();
+
+// interface User {
+//   email: string;
+//   firstName: string;
+//   lastName: string;
+//   password: string;
+//   role?: Role | null;
+// }
+
+// async function createUser(user: User){
+//   const createdUser = await prisma.user.create({
+//     data: user,
+//   });
+
+//   console.log(createdUser);
+//   return createdUser
+// }
+
+// export { createUser }
+
+
+
+
+import { PrismaClient, Role, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -10,24 +36,35 @@ interface User {
   role?: Role | null;
 }
 
-async function createUser(user: User) {
+async function createUser(user: User){
   const createdUser = await prisma.user.create({
     data: user,
   });
 
   console.log(createdUser);
+  return createdUser
 }
 
+async function findUniqueUser(where: Prisma.UserWhereUniqueInput) {
+  const user = await prisma.user.findUnique({
+    where,
+  });
 
+  return user;
+}
 
+async function findUsers(params: {
+  skip?: number;
+  take?: number;
+  cursor?: Prisma.UserWhereUniqueInput;
+  where?: Prisma.UserWhereInput;
+  orderBy?: Prisma.UserOrderByWithRelationInput;
+}) {
+  const users = await prisma.user.findMany({
+    ...params,
+  });
 
+  return users;
+}
 
-createUser({
-  email: "ishimwe@ishimweeee.rw",
-  firstName: "ishimwe",
-  lastName: "robert",
-  password: "test@test",
-  role: "USER",
-});
-
-export { createUser }
+export { createUser, findUniqueUser, findUsers };
