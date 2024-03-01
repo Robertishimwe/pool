@@ -33,6 +33,13 @@ const Verify = async (req: CustomRequest, res: Response, next: NextFunction) => 
       return res.status(401).send({ message: "Invalid token" });
     }
 
+    if(user?.isBlocked){
+      return res.status(401).send({ message: "You were blocked by the administrator" });
+    }
+
+    if(!user?.isActive){
+      return res.status(401).send({ message: "Your account is not active" });
+    }
     req.user = user;
     next();
   } catch (error) {

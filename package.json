@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node dist/index.js",
-    "dev": "ts-node-dev --watch --respawn src/index.ts"
+    "dev": "ts-node-dev --watch --respawn src/index.ts",
+    "prestart": "mkdir -p logs"
   },
   "keywords": [],
   "author": "",
